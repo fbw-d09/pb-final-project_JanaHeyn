@@ -77,7 +77,14 @@ class Player
         return `🪄️  🪄️  🪄️  - ${this.name} hat 20 Magiepunkte von Merlin 🧙️ erhalten!` + `\r\n${this.name} besitzt nun insgesamt ${this.magic} Magiepunkte.`;
     }
 
+    /* getUpdate() {
+        console.log(this.money, this.magic)
+    }  */
+
     getRandomItem(enemy) {
+
+        /* setTimeout(this.getUpdate.bind(this) ,(2000 * this.getUpdate())); */
+
         // mit Muscheln eine Überraschung kaufen aus diesem Array:
         const items = ["Kraft 💖️", "Magieklau 🧲️🪄️", "Angriff 🗡️", "Wasserpistole 🔫️", "Geld 🐚️"];
 

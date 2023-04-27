@@ -7,8 +7,8 @@ const Player = require('./src/Player');
 
 // Spieler
 const elliot = new Player("Elliot 🐉️", 120, 80);
-// const freeky = new Player("Freeky 🧟", 120, 80);
-const elfie = new Player("Elfie 🧝", 120, 80);
+const freeky = new Player("Freeky 🧟", 120, 80, 300);
+// const elfie = new Player("Elfie 🧝", 120, 80);
 // const jeannie = new Player("Jeannie 🧞️", 120, 80);
 
 // Fähigkeiten
@@ -83,66 +83,76 @@ console.log(); */
 
 
 // 2. Kampf | Runde 1
-/* console.clear();
-console.log("2. Kampf | Elliot vs Freeky | Runde 1:");
-console.log();
-console.log(elliot.getStatus());
-console.log();
-console.log(freeky.getStatus());
-console.log();
-console.log(elliot.learnSkill(feuer));
-console.log();
-console.log(freeky.learnSkill(wasserfontäne));
-console.log();
-console.log(elliot.learnSkill(versteinerung));
-console.log();
-console.log(freeky.learnSkill(einfrieren));
-console.log();
-console.log(elliot.getStatus());
-console.log();
-console.log(freeky.getStatus());
-console.log();
-console.log(elliot.attack(1, freeky));
-console.log();
-console.log(freeky.attack(0, elliot));
-console.log(); */
+// console.clear();
+// console.log("2. Kampf | Elliot vs Freeky | Runde 1:");
+// console.log();
+// console.log(elliot.getStatus());
+// console.log();
+// console.log(freeky.getStatus());
+// console.log();
+// console.log(elliot.learnSkill(feuer));
+// console.log();
+// console.log(freeky.learnSkill(wasserfontäne));
+// console.log();
+// console.log(elliot.learnSkill(versteinerung));
+// console.log();
+// console.log(freeky.learnSkill(einfrieren));
+// console.log();
+// console.log(elliot.getStatus());
+// console.log();
+// console.log(freeky.getStatus());
+// console.log();
+// console.log(elliot.attack(1, freeky));
+// console.log();
+// console.log(freeky.attack(0, elliot));
+// console.log(); 
 
 // 2. Kampf | Runde 2
-/* console.log("2. Kampf | Elliot vs Freeky | Runde 2:");
-console.log();
-console.log(elliot.getStatus());
-console.log();
-console.log(freeky.getStatus());
-console.log();
+// console.log("2. Kampf | Elliot vs Freeky | Runde 2:");
+// console.log();
+// console.log(elliot.getStatus());
+// console.log();
+// console.log(freeky.getStatus());
+// console.log();
 
-console.log(elliot.learnSkill(blitz));
-console.log(); */
+// console.log(elliot.learnSkill(blitz));
+// console.log();
+// console.log(elliot.getStatus());
+// console.log();
+// console.log(freeky.getStatus());
+// console.log();
 // console.log(freeky.getRandomItem(elliot));
 // console.log();
 // freeky erhält eine wasserpistole:
 // zwischen-status freeky:
 // kraft: 80, magie: 70, händisch umändern --> muscheln: 600 -> 300, 
-/* console.log(elliot.getStatus());
-console.log();
-console.log(freeky.getStatus());
-console.log();
-console.log(elliot.attack(2, freeky));
-console.log();
-console.log(elliot.getStatus());
-console.log();
-console.log(freeky.getStatus());
-console.log();
-console.log(); */
+// console.log(freeky.getStatus());
+// console.log();
+// console.log(elliot.getStatus());
+// console.log();
+// console.log(elliot.attack(2, freeky));
+// console.log();
+// console.log(elliot.getStatus());
+// console.log();
+// console.log(freeky.getStatus());
+// console.log();
+// console.log();
 // console.log(freeky.getRandomItem(elliot));
 // freeky gibt 300 ab und erhält 600:
 // zwischen-status freeky
 // kraft: 20, magie: 70, händisch umändern --> msucheln: 300 -> 0;
-/* console.log(elliot.getStatus());
-console.log();
-console.log(freeky.getStatus());
-console.log();
-console.log(elliot.attack(0, freeky)); */
+// console.log(elliot.getStatus());
+// console.log();
+// console.log(freeky.getStatus());
+// console.log();
+// console.log(elliot.attack(0, freeky)); 
 //Gewinner 2.Kampf: Elliot
+
+
+
+
+
+
 
 // 3. Kampf 1. Runde
 /* console.log("3. Kampf | Elfie vs Elliot | Runde 1:");
@@ -181,11 +191,11 @@ console.log(bombe);
 console.log(einfrieren);
 console.log(); */
 // console.log(elliot.attack(1, elfie));
-/* console.log();
-console.log(elfie.getStatus()); */
-console.log(elliot.getStatus());
-console.log();
-console.log(blitz);
-console.log(versteinerung);
-console.log();
-console.log(elfie.attack(0, elliot));
+// console.log();
+// // console.log(elfie.getStatus());
+// console.log(elliot.getStatus());
+// console.log();
+// console.log(blitz);
+// console.log(versteinerung);
+// console.log();
+// console.log(elfie.attack(0, elliot));
