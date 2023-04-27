@@ -6,12 +6,12 @@ class Player
     skills;
     money;
 
-    constructor(name, power, magic, money = 600) {
+    constructor(name, power, magic, money) {
         this.name = name;       // string + symbol  
         this.power = power;     // nummer
         this.magic = magic;     // nummer
         this.skills = [];       // wird erlernt, 
-        this.money = money;       // Defaultwert 600 
+        this.money = 600;     // Defaultwert 600 
     }
 
     getSkills() {
@@ -30,7 +30,6 @@ class Player
     getStatus() {
         // nur den Namen der einzelnen Fähigkeiten abgreifen (jede Fähigkeit ist ein einzelnes Objekt!)
         let skillNames = this.skills.map(obj => obj.name);
-        // console.log("name:", skillNames);
         
         if(this.skills.length == 0) {
             return `--- Status von ${this.name} ---\r\nKraft 💖️ \t: ${this.power}\r\nMagie 🪄️ \t: ${this.magic}\r\nFähigkeiten 💪️ \t: noch keine Fähigkeiten erlernt\r\nGeld 🐚️ \t: ${this.money}`
@@ -47,7 +46,6 @@ class Player
         // console.log("das ist die fähigkeit:", this.skills[skill].name);
 
         let attack = this.skills[skill];
-        // console.log("das ist die attacke:", attack);
 
         // prüfen, ob genug Gesundheit
         if(this.power <= 0) {
@@ -57,7 +55,7 @@ class Player
         else if(this.magic < attack.neededmagic) {
             return `⛔️ ${this.name} hat nicht genug Magie für diesen Angriff.`;
         }
-        // prüfen, ob Gegner nach Abzug des Schadens <= 0 bzw dann tot ist
+        // prüfen, ob Gegner nach Abzug des Schadens <= 0 bzw dann ausgeschieden ist
         else if(enemy.power - attack.damage <= 0) {
             enemy.power = 0;
             return `${enemy.name} hat keine Kraft mehr und gibt auf 🏳️.\r\n${this.name} hat gewonnen 🏆️!`
@@ -66,7 +64,7 @@ class Player
         else {
             enemy.power -= attack.damage;
             this.magic -= attack.neededmagic;
-            return `💥️ ${this.name} hat die Fähigkeit ${attack.name} erfolgreich ausgeführt!\r\n- minus ${attack.damage} Kraftpunkte für ${enemy.name}\r\n- minus ${attack.neededmagic} Magiepunkte für ${this.name}.`    
+            return `💥️ ${this.name} hat die Fähigkeit ${attack.name} erfolgreich ausgeführt!\r\n- minus ${attack.damage} 💖️ Kraftpunkte für ${enemy.name}\r\n- minus ${attack.neededmagic} 🪄️  Magiepunkte für ${this.name}.`    
         }
     }
 
@@ -77,70 +75,61 @@ class Player
         return `🪄️  🪄️  🪄️  - ${this.name} hat 20 Magiepunkte von Merlin 🧙️ erhalten!` + `\r\n${this.name} besitzt nun insgesamt ${this.magic} Magiepunkte.`;
     }
 
-    /* getUpdate() {
-        console.log(this.money, this.magic)
-    }  */
-
-    getRandomItem(enemy) {
-
-        /* setTimeout(this.getUpdate.bind(this) ,(2000 * this.getUpdate())); */
-
+    getRandomItem() {
         // mit Muscheln eine Überraschung kaufen aus diesem Array:
-        const items = ["Kraft 💖️", "Magieklau 🧲️🪄️", "Angriff 🗡️", "Wasserpistole 🔫️", "Geld 🐚️"];
-
-        // zufällig ein Item auswählen und in einer Variablen abspeichern:
+        const items = ["🍬️", "🎁️", "🪅️", "💌️", "🔮️"];
+        //zufällig gewähltes Item
         const random = Math.floor(Math.random()*items.length);
         const randomItem = items[random];
+        return `${this.name} hat für 300🐚️ am Glücksspiel 🎰️ teilgenommen und  ${randomItem}  erhalten.`;
+    }
 
+    openItem(randomItem, enemy) {
         // Muscheln werden abgezogen:
         this.money -= 300;
 
         // Konditionen erstellen für jedes Item:
-        if(randomItem === "Kraft 💖️") {
+        if(randomItem === "🍬️") {
             this.power += 30;
-            return `${this.name} gibt 300🐚️ ab und erhält dafür +30 ${randomItem} Punkte!`
+            return `${this.name} isst das 🍬️ und erhält dafür +30 Kraft 💖️ Punkte!`
         }
-        else if(randomItem === "Magieklau 🧲️🪄️") {
+        else if(randomItem === "🎁️") {
             if(enemy.magic === 0) {
-                return `Sorry! Bei ${enemy.name} gibt es keine Magiepunkte mehr zu klauen.`
+                return `${this.name} öffnet das 🎁️ und hat den Magiemagneten 🧲️🪄️ erhalten! \r\nDoch bei ${enemy.name} gibt es leider keine Magiepunkte mehr zu klauen.`
             }
             else if(enemy.magic === 10) {
                 enemy.magic = 0;
                 this.magic += 10;
-                return `${this.name} hat für 300🐚️ ${randomItem} eingetauscht und klaut von ${enemy.name} die restlichen 10 Magiepunkte!`
+                return `${this.name} öffnet das 🎁️ und hat den Magiemagneten 🧲️🪄️ erhalten und klaut ${enemy.name}s restliche 10 Magiepunkte!`
             }
             else if(enemy.magic === 20) {
                 enemy.magic = 0;
                 this.magic += 20;
-                return `${this.name} hat für 300🐚️ ${randomItem}  eingetauscht und klaut von ${enemy.name} alle 20 Magiepunkte!`
+                return `${this.name} öffnet das 🎁️ und hat den Magiemagneten 🧲️🪄️ erhalten und klaut ${enemy.name}s restliche 20 Magiepunkte!`
             }
             else if(enemy.magic >= 30) {
                 enemy.magic -= 30;
                 this.magic += 30;
-                return `${this.name} hat für 300🐚️ ${randomItem}  eingetauscht und klaut von ${enemy.name} ganze 30 Magiepunkte!`
+                return `${this.name} öffnet das 🎁️ und hat den Magiemagneten 🧲️🪄️  gewonnen und klaut von ${enemy.name} ganze 30 Magiepunkte!`
             }
         }
-        else if(randomItem === "Angriff 🗡️") {
+        else if(randomItem === "🪅️") {
             if(enemy.power === 10 || enemy.power === 20 || enemy.power === 30) {
                 enemy.power = 0;
-                return `${this.name} hat für 300🐚️ einen Extrtazug ${randomItem}  gekauft und greift ${enemy.name} an.\r\n${enemy.name} 🏳️  gibt auf und verliert das Spiel.\r\n${this.name} gewinnt das Spiel 🏆️!`
+                return `${this.name} öffnet das 🪅️  und hat ein 🗡️  erhalten und greift ${enemy.name} an.\r\n${enemy.name} 🏳️  gibt auf und verliert das Spiel.\r\n${this.name} gewinnt das Spiel 🏆️!`
             }
             else {
                 enemy.power -= 30;
-                return `${this.name} hat für 300🐚️ einen Extrtazug ${randomItem}  gekauft und greift ${enemy.name} an.\r\n${enemy.name} verliert 30 Kraftpunkte!`
+                return `${this.name} öffnet das 🪅️  und hat ein 🗡️  erhalten und greift ${enemy.name} an.\r\n${enemy.name} verliert 30 Kraftpunkte!`
             }
         }
-        else if(randomItem === "Geld 🐚️") {
+        else if(randomItem === "💌️") {
             this.money += 600;
-            return `${this.name} gibt ❌️ 300🐚️ ab und erhält ✅️ 600🐚️ zurück!`
+            return `${this.name} öffnet den Brief und bekommt 600🐚️ zurück!`
         }
         else {
-            return `${this.name} hat eine ${randomItem} erhalten 🎉️🎉️🎉️!\r\nAch so, das ist übrigens eine Niete 🎭️\r\nDie 300🐚️ werden dennoch abgezogen 🤷️!`;
-            
+            return `${this.name} reibt an der 🔮️ und herauskommt eine 🔫️ Wasserpistole 🎉️🎉️🎉️!\r\nAch so, das ist übrigens eine Niete 🎭️\r\nDie 300🐚️ gibt es nicht zurück 🤷️!`;   
         }
-
-        // console.log(items[random]);
-        // console.log(this.getStatus());
     }
 }
 
