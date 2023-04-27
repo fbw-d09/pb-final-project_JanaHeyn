@@ -20,6 +20,11 @@ class Player
 
     // Methode: neue Fähigkeit erlernen
     learnSkill(skill) {
+
+        // erst prüfen, ob die Fähigkeit bereits erlernt wurde
+        if(this.skills.includes(skill)) {
+            return `${this.name} hat die Fähigkeit ${skill.name} bereits erlernt.`
+        }
         // skill dem array this.skills hinzufügen  
         this.skills.push(skill); 
         // console.log("das ist die fähigkeit:", this.skills[this.skills.length -1].name);
@@ -43,28 +48,33 @@ class Player
     // Methode: Angreifen
     attack(skill, enemy) {
         // skill = Bezug zum enstprechenden Element aus Array of Skills des angreifenden Spielers herstellen und in einer neuen variablen abspeichern:
+
+        // Indexnummer eingeben
+        // let attack = this.skills[skill].name;
         // console.log("das ist die fähigkeit:", this.skills[skill].name);
 
-        let attack = this.skills[skill];
+        // Skillname eingeben:
+        let attack = skill.name;
+        // console.log("fähigkeit:", attack);
 
         // prüfen, ob genug Gesundheit
         if(this.power <= 0) {
             return `🪦️  ${this.name} ist bereits ausgeschieden und kann nicht mehr kämpfen.`;   
         } 
         // prüfen, ob genug Magie 
-        else if(this.magic < attack.neededmagic) {
+        else if(this.magic < skill.neededmagic) {
             return `⛔️ ${this.name} hat nicht genug Magie für diesen Angriff.`;
         }
         // prüfen, ob Gegner nach Abzug des Schadens <= 0 bzw dann ausgeschieden ist
-        else if(enemy.power - attack.damage <= 0) {
+        else if(enemy.power - skill.damage <= 0) {
             enemy.power = 0;
             return `${enemy.name} hat keine Kraft mehr und gibt auf 🏳️.\r\n${this.name} hat gewonnen 🏆️!`
         }
         // Abzug damage von Gegner
         else {
-            enemy.power -= attack.damage;
-            this.magic -= attack.neededmagic;
-            return `💥️ ${this.name} hat die Fähigkeit ${attack.name} erfolgreich ausgeführt!\r\n- minus ${attack.damage} 💖️ Kraftpunkte für ${enemy.name}\r\n- minus ${attack.neededmagic} 🪄️  Magiepunkte für ${this.name}.`    
+            enemy.power -= skill.damage;
+            this.magic -= skill.neededmagic;
+            return `💥️ ${this.name} hat die Fähigkeit ${attack} erfolgreich ausgeführt!\r\n- minus ${skill.damage} 💖️ Kraftpunkte für ${enemy.name}\r\n- minus ${skill.neededmagic} 🪄️  Magiepunkte für ${this.name}.`    
         }
     }
 
