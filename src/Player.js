@@ -57,7 +57,7 @@ class Player
         let attack = skill.name;
         // console.log("fähigkeit:", attack);
 
-        // prüfen, ob genug Gesundheit
+        // prüfen, ob Angreifer noch im Spiel
         if(this.power <= 0) {
             return `🪦️  ${this.name} ist bereits ausgeschieden und kann nicht mehr kämpfen.`;   
         } 
@@ -65,10 +65,14 @@ class Player
         else if(this.magic < skill.neededmagic) {
             return `⛔️ ${this.name} hat nicht genug Magie für diesen Angriff.`;
         }
+        // prüfen, ob Angreifer die Fähigkleit schon erlernt hat
+        else if (!this.skills.includes(skill)) {
+            return `${this.name} hat die Fähigkeit ${skill.name} noch nicht erlernt.`
+        }
         // prüfen, ob Gegner nach Abzug des Schadens <= 0 bzw dann ausgeschieden ist
         else if(enemy.power - skill.damage <= 0) {
             enemy.power = 0;
-            return `${enemy.name} hat keine Kraft mehr und gibt auf 🏳️.\r\n${this.name} hat gewonnen 🏆️!`
+            return `💥️ Der Angriff war erfolgreich! ${enemy.name} hat keine Kraft mehr und gibt auf 🏳️\r\n${this.name} hat gewonnen 🏆️!`
         }
         // Abzug damage von Gegner
         else {
@@ -78,6 +82,7 @@ class Player
         }
     }
 
+    // Magie von Merlin erhalten
     getMagic() {
         // der Spieler etwas Magie zurück von Merlin
         this.magic += 20; 
@@ -85,6 +90,7 @@ class Player
         return `🪄️  🪄️  🪄️  - ${this.name} hat 20 Magiepunkte von Merlin 🧙️ erhalten!` + `\r\n${this.name} besitzt nun insgesamt ${this.magic} Magiepunkte.`;
     }
 
+    // Zufällig auserwähltes Item erhalten beim Glücksspiel
     getRandomItem() {
         // mit Muscheln eine Überraschung kaufen aus diesem Array:
         const items = ["🍬️", "🎁️", "🪅️", "💌️", "🔮️"];
@@ -94,6 +100,7 @@ class Player
         return `${this.name} hat für 300🐚️ am Glücksspiel 🎰️ teilgenommen und  ${randomItem}  erhalten.`;
     }
 
+    // erhaltenes Item öffnen
     openItem(randomItem, enemy) {
         // Muscheln werden abgezogen:
         this.money -= 300;
